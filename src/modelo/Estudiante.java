@@ -31,6 +31,12 @@ public class Estudiante {
 		this.id = id;
 	}
 
+	public Materias getMateria() {
+		return materia;
+	}
+	public void setMateria(Materias materia) {
+		this.materia = materia;
+	}
 	public String getNombre() {
 		return nombre;
 	}

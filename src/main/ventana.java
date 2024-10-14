@@ -2,52 +2,35 @@ package main;
 
 import java.awt.EventQueue;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-
-import modelo.Estudiante;
-import modelo.Materias;
-
-import java.awt.FlowLayout;
-import javax.swing.JList;
-import java.awt.GridLayout;
-import java.awt.CardLayout;
 import java.awt.BorderLayout;
-import javax.swing.JTable;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import modelo.Materias;
+import modelo.Estudiante;
+import java.util.ArrayList;
+
+import javax.swing.JList;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
-public class ventana {
+public class Ventana {
 
 	private JFrame frame;
 	private JTable table;
-	private JPanel panel;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
+	ArrayList<Estudiante>estudiantes = new ArrayList<Estudiante>();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Object[][]datos= {
-				{"1","Pedro","ertb",Materias.Biologia},
-				{"2","antonio","erh",Materias.Fisica},
-				{"3","juan","wrgt",Materias.Biologia},
-				{"4","perco","rtgw",Materias.Fisica},
-				{"5","contran","retbet",Materias.LenguaEspañola},
-				{"6","cdv","erthe",Materias.Fisica},
-				{"7","dte","erthe",Materias.LenguaEspañola},
-				{"8","Pedrertheto","erthet",Materias.Fisica},
-		};
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ventana window = new ventana();
+					Ventana window = new Ventana();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +42,7 @@ public class ventana {
 	/**
 	 * Create the application.
 	 */
-	public ventana() {
+	public Ventana() {
 		initialize();
 	}
 
@@ -68,63 +51,90 @@ public class ventana {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 559, 300);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		frame.setResizable(false);
-		DefaultListModel model = new DefaultListModel<>();
-		JList<Materias> list = new JList<>(model);
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				
-				Materias m =(Materias)list.getSelectedValue();
-				if(m==Materias.Biologia ) {
-					
-				}
-			}
-		});
-		for(Materias m : Materias.values()) {
-			model.addElement(m);
-			
-		}
 		
-		frame.getContentPane().add(list, BorderLayout.WEST);
 		
-		//la tabla
 		
-		//encabezados
+		
+		
+		
+		
+		
+		
+//panel de botones con botones		
+		JPanel panel_botones = new JPanel();
+		frame.getContentPane().add(panel_botones, BorderLayout.SOUTH);
+		
+		JButton btnNewButton = new JButton("New button");
+		panel_botones.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		panel_botones.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		panel_botones.add(btnNewButton_2);
 		String[] columnas= {"Id","Nombre","Apellido","Nota"	};
+		
 		//lista de objetos dentro de la tabla
 		 Object[][]datos= {
-				{"1","Pedro","ertb",Materias.Biologia},
-				{"2","antonio","erh",Materias.Fisica},
-				{"3","juan","wrgt",Materias.Biologia},
-				{"4","perco","rtgw",Materias.Fisica},
-				{"5","contran","retbet",Materias.LenguaEspañola},
-				{"6","cdv","erthe",Materias.Fisica},
-				{"7","dte","erthe",Materias.LenguaEspañola},
-				{"8","Pedrertheto","erthet",Materias.Fisica},
+				{"1","Pedro","ertb",Materias.Biologia.getNombrecurso()},
+				{"2","antonio","erh",Materias.Fisica.getNombrecurso()},
+				{"3","juan","wrgt",Materias.Biologia.getNombrecurso()},
+				{"4","perco","rtgw",Materias.Fisica.getNombrecurso()},
+				{"5","contran","retbet",Materias.LenguaEspañola.getNombrecurso()},
+				{"6","cdv","erthe",Materias.Fisica.getNombrecurso()},
+				{"7","dte","erthe",Materias.LenguaEspañola.getNombrecurso()},
+				{"8","Pedrertheto","erthet",Materias.Fisica.getNombrecurso()},
 		};
-		//hacemos el modelo donde van los datos
-		DefaultTableModel modelo = new DefaultTableModel(datos,columnas);
-		
-		//a la tabla al final debemos pasarle al argumento del modelo
+		 estudiantes.add(new Estudiante("1","wrtgwr","ertb","sdv",Materias.Biologia));
+		 estudiantes.add(new Estudiante("1","wrgwrg","ertb","sdv",Materias.Biologia));
+		 estudiantes.add(new Estudiante("1","Pedro","ertb","sdv",Materias.Fisica));
+		 estudiantes.add(new Estudiante("1","wrgtwr","ertb","sdv",Materias.Fisica));
+		 estudiantes.add(new Estudiante("1","Pedro","ertb","sdv",Materias.LenguaEspañola));
+		 estudiantes.add(new Estudiante("1","wtbw","ertb","sdv",Materias.LenguaEspañola));
+		 estudiantes.add(new Estudiante("1","wrgwg","ertb","sdv",Materias.Matematica));
+		 estudiantes.add(new Estudiante("1","Pedro","ertb","sdv",Materias.Matematica));
+		 DefaultTableModel modelo = new DefaultTableModel(datos,columnas);
 		table = new JTable(modelo);
-		//y le damos en scroll a la propia tabla
-		frame.getContentPane().add(table, BorderLayout.EAST);
-		//JScrollPane scroll= new JScrollPane(table);
+		frame.getContentPane().add(table, BorderLayout.CENTER);
 		
-		panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.WEST);
+		String[]clases= {
+				Materias.Biologia.getNombrecurso(),
+				Materias.Fisica.getNombrecurso(),
+				Materias.LenguaEspañola.getNombrecurso(),
+				Materias.Matematica.getNombrecurso(),
+		};
+		JList<String>list = new JList<>(clases);
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				String dato =list.getSelectedValue();
+				//metodo creado ppara cambiar lo que se muestre si se da click a una materia
+				cambiarComtenido(dato);
+			}
+		});
+		panel.add(list);
 		
-		btnNewButton = new JButton("New button");
-		panel.add(btnNewButton);
 		
-		btnNewButton_1 = new JButton("New button");
-		panel.add(btnNewButton_1);
 		
-		btnNewButton_2 = new JButton("New button");
-		panel.add(btnNewButton_2);
+		
 	}
-
+        private void cambiarComtenido(String materia) {
+        	DefaultTableModel modificar_row = (DefaultTableModel) table.getModel();
+        	modificar_row.setRowCount(0);
+        	for(Estudiante es:estudiantes) {
+        		if(es.getMateria().getNombrecurso() == materia) {
+        			modificar_row.addRow(new Object[] {
+        					es.getId(),
+        					es.getNombre(),
+        					es.getApellidos(),
+        					es.getNota(),
+        					es.getMateria().getNombrecurso()
+        			});
+        		}
+        	}
+		}
 }
